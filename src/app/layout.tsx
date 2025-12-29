@@ -25,7 +25,7 @@ export default function RootLayout({
         <header className="py-[7px] fixed w-full flex items-center justify-center bg-background shadow-[0_1px_0_0_var(--color-green-teal)]">
           <h1 className="text-[9px] font-bold text-green-teal-2">SWStarter</h1>
         </header>
-        <main className="bg-[#ededed] h-screen">{children}</main>
+        <main className="pt-[28px] bg-[#ededed] h-screen">{children}</main>
       </body>
     </html>
   );
