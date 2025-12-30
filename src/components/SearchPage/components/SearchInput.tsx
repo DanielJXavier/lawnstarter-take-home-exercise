@@ -19,7 +19,7 @@ export default function SearchInput() {
         className="px-[5px] py-1.5 rounded-xs border-[0.5px] borde-[#383838] placeholder-shown:border-green-teal shadow-[inset_0_0.5px_1.5px_0_var(--color-warm-grey-75)] text-[7px] font-bold placeholder-pinkish-grey outline-none"
         type="text"
         placeholder={
-          searchType === "people"
+          searchType === SearchType.PEOPLE
             ? "e.g. Chewbacca, Yoda, Boba Fett"
             : "e.g. A New Hope, The Empire Strikes Back, Return of the Jedi"
         }
