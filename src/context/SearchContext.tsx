@@ -19,6 +19,8 @@ export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [isSearching, setIsSearching] = useState(false);
 
+  const [error, setError] = useState<string | null>(null);
+
   const [results, setResults] = useState<SearchResult[]>([]);
 
   return (
@@ -30,6 +32,8 @@ export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
         setSearchTerm,
         isSearching,
         setIsSearching,
+        error,
+        setError,
         results,
         setResults,
       }}

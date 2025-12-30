@@ -10,6 +10,7 @@ export default function SearchForm() {
     setSearchTerm,
     isSearching,
     setIsSearching,
+    setError,
     setResults,
   } = useSearchContext();
 
@@ -17,6 +18,7 @@ export default function SearchForm() {
     e.preventDefault();
 
     setIsSearching(true);
+    setError(null);
 
     try {
       const response = await fetch(
@@ -27,7 +29,7 @@ export default function SearchForm() {
 
       setResults(data.results);
     } catch (error) {
-      console.error(error);
+      setError((error as Error).message);
     } finally {
       setIsSearching(false);
     }

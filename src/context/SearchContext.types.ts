@@ -24,6 +24,8 @@ export type SearchContextType = {
   setSearchTerm: Dispatch<SetStateAction<string>>;
   isSearching: boolean;
   setIsSearching: Dispatch<SetStateAction<boolean>>;
+  error: string | null;
+  setError: Dispatch<SetStateAction<string | null>>;
   results: SearchResult[];
   setResults: Dispatch<SetStateAction<SearchResult[]>>;
 };
