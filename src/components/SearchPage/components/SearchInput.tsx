@@ -1,11 +1,14 @@
-"use client";
+import { useSearchContext } from "@/src/context/SearchContext";
 
-import { useState } from "react";
-
-export default function Search() {
-  const [searchType, setSearchType] = useState<"people" | "movies">("people");
-
-  const [searchTerm, setSearchTerm] = useState<string>("");
+export default function SearchInput() {
+  const {
+    searchType,
+    setSearchType,
+    searchTerm,
+    setSearchTerm,
+    isSearching,
+    setIsSearching,
+  } = useSearchContext();
 
   return (
     <div className="w-[205px] mt-[15px] p-[15px] grid gap-y-2.5 bg-white rounded-xs border-[0.5px] border-green-teal shadow-[0_0.5px_1px_0_var(--color-warm-grey-75)]">
@@ -56,10 +59,11 @@ export default function Search() {
       />
 
       <button
-        className="py-1 rounded-[10px] border-[0.5px] broder-green-teal-2 disabled:border-pinkish-grey bg-green-teal-2 disabled:bg-pinkish-grey text-white font-bold text-[7px] uppercase cursor-pointer disabled:cursor-not-allowed"
+        className="py-1 rounded-[10px] border-[0.5px] broder-green-teal-2 disabled:border-pinkish-grey bg-green-teal-2 disabled:bg-pinkish-grey text-white font-bold text-[7px] uppercase cursor-pointer disabled:cursor-not-allowed outline-none"
         disabled={!searchTerm}
+        onClick={() => setIsSearching(true)}
       >
-        Search
+        {isSearching ? "Searching..." : "Search"}
       </button>
     </div>
   );
