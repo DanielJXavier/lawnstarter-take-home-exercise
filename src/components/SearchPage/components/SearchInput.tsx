@@ -10,7 +10,6 @@ export default function SearchInput() {
     setSearchTerm,
     isSearching,
     setIsSearching,
-    setResultType,
     setResults,
   } = useSearchContext();
 
@@ -26,7 +25,6 @@ export default function SearchInput() {
 
       const data = await response.json();
 
-      setResultType(searchType);
       setResults(data.results);
     } catch (error) {
       console.error(error);

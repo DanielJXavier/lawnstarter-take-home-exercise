@@ -4,7 +4,7 @@ import { useSearchContext } from "@/src/context/SearchContext";
 import { SearchType } from "@/src/context/SearchContext.types";
 
 export default function Results() {
-  const { resultType, results, isSearching } = useSearchContext();
+  const { results, isSearching } = useSearchContext();
 
   return (
     <div className="w-[291px] min-h-[291px] mt-[15px] p-[15px] grid gap-y-[5px] grid-rows-[auto_auto_1fr] bg-white rounded-xs border-[0.5px] border-green-teal shadow-[0_0.5px_1px_0_var(--color-warm-grey-75)]">
@@ -24,14 +24,14 @@ export default function Results() {
                 <Fragment key={result.uid}>
                   <li className="flex items-center justify-between">
                     <span className="text-[8px] font-bold">
-                      {resultType === SearchType.PEOPLE
+                      {result.type === SearchType.PEOPLE
                         ? result.name
                         : result.title}
                     </span>
 
                     <a
                       className="px-2.5 py-1 bg-green-teal-2 rounded-[8.5px] text-[7px] font-bold text-white"
-                      href={`/${resultType}/${result.uid}`}
+                      href={`/${result.type}/${result.uid}`}
                     >
                       SEE DETAILS
                     </a>

@@ -1,4 +1,11 @@
-export type PeopleSearchResult = {
+type BaseSearchResult = {
+  _id: string;
+  description: string;
+  uid: string;
+  __v: number;
+};
+
+export interface PeopleSearchResult extends BaseSearchResult {
   properties: {
     created: string;
     edited: string;
@@ -16,13 +23,9 @@ export type PeopleSearchResult = {
     films: string[];
     url: string;
   };
-  _id: string;
-  description: string;
-  uid: string;
-  __v: number;
-};
+}
 
-export type MoviesSearchResult = {
+export interface MoviesSearchResult extends BaseSearchResult {
   properties: {
     created: string;
     edited: string;
@@ -39,8 +42,4 @@ export type MoviesSearchResult = {
     species: string[];
     url: string;
   };
-  _id: string;
-  description: string;
-  uid: string;
-  __v: number;
-};
+}

@@ -5,11 +5,17 @@ export enum SearchType {
   MOVIES = "movies",
 }
 
-export type SearchResult = {
-  uid: string;
-  name?: string;
-  title?: string;
-};
+export type SearchResult =
+  | {
+      type: SearchType.PEOPLE;
+      uid: string;
+      name: string;
+    }
+  | {
+      type: SearchType.MOVIES;
+      uid: string;
+      title: string;
+    };
 
 export type SearchContextType = {
   searchType: SearchType;
@@ -18,8 +24,6 @@ export type SearchContextType = {
   setSearchTerm: Dispatch<SetStateAction<string>>;
   isSearching: boolean;
   setIsSearching: Dispatch<SetStateAction<boolean>>;
-  resultType: SearchType;
-  setResultType: Dispatch<SetStateAction<SearchType>>;
   results: SearchResult[];
   setResults: Dispatch<SetStateAction<SearchResult[]>>;
 };

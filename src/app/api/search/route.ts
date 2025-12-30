@@ -22,6 +22,7 @@ export async function GET(request: Request) {
     }
 
     const results = data.result.map((result: PeopleSearchResult) => ({
+      type: SearchType.PEOPLE,
       uid: result.uid,
       name: result.properties.name,
     }));
@@ -41,6 +42,7 @@ export async function GET(request: Request) {
     }
 
     const results = data.result.map((result: MoviesSearchResult) => ({
+      type: SearchType.MOVIES,
       uid: result.uid,
       title: result.properties.title,
     }));
