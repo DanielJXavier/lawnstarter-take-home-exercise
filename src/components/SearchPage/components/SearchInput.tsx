@@ -16,7 +16,7 @@ export default function SearchInput() {
       </div>
 
       <input
-        className="px-[5px] py-1.5 rounded-xs border-[0.5px] borde-[#383838] placeholder-shown:border-green-teal shadow-[inset_0_0.5px_1.5px_0_var(--color-warm-grey-75)] text-[7px] font-bold placeholder-pinkish-grey outline-none"
+        className="px-[5px] py-1.5 rounded-xs border-[0.5px] border-[#383838] placeholder-shown:border-green-teal shadow-[inset_0_0.5px_1.5px_0_var(--color-warm-grey-75)] text-[7px] font-bold placeholder-pinkish-grey outline-none"
         type="text"
         placeholder={
           searchType === SearchType.PEOPLE
