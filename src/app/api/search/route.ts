@@ -1,4 +1,4 @@
-import { getFromSWAP } from "@/src/utils/getFromSWAP";
+import { searchFromSWAP } from "@/src/utils/searchFromSWAP";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -11,7 +11,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const results = await getFromSWAP(type, term);
+    const results = await searchFromSWAP(type, term);
 
     return Response.json({ results });
   } catch (error) {
