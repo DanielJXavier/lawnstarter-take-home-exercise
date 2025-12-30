@@ -1,11 +1,11 @@
-type BaseSearchResult = {
+type BaseResult = {
   _id: string;
   description: string;
   uid: string;
   __v: number;
 };
 
-export interface PeopleSearchResult extends BaseSearchResult {
+export interface PeopleResult extends BaseResult {
   properties: {
     created: string;
     edited: string;
@@ -25,7 +25,7 @@ export interface PeopleSearchResult extends BaseSearchResult {
   };
 }
 
-export interface MoviesSearchResult extends BaseSearchResult {
+export interface MoviesResult extends BaseResult {
   properties: {
     created: string;
     edited: string;

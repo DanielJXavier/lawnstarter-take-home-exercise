@@ -1,7 +1,4 @@
-import {
-  MoviesSearchResult,
-  PeopleSearchResult,
-} from "../app/api/search/types";
+import { PeopleResult, MoviesResult } from "@/src/app/api/types";
 
 import { SearchType } from "../context/SearchContext.types";
 
@@ -27,13 +24,13 @@ export const searchFromSWAP = async (type: string, term: string) => {
   }
 
   if (isPeople) {
-    return result.map((result: PeopleSearchResult) => ({
+    return result.map((result: PeopleResult) => ({
       type: SearchType.PEOPLE,
       uid: result.uid,
       name: result.properties.name,
     }));
   } else {
-    return result.map((result: MoviesSearchResult) => ({
+    return result.map((result: MoviesResult) => ({
       type: SearchType.MOVIES,
       uid: result.uid,
       title: result.properties.title,
