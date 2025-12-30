@@ -4,7 +4,7 @@ import { SearchType } from "../context/SearchContext.types";
 
 const BASE_SWAP_URL = "https://swapi.tech/api";
 
-export const searchFromSWAP = async (type: string, term: string) => {
+export const searchFromSWAPI = async (type: string, term: string) => {
   const isPeople = type === SearchType.PEOPLE;
 
   const targetUrl = isPeople
