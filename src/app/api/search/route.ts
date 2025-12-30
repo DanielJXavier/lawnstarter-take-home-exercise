@@ -1,6 +1,4 @@
-import { SearchType } from "@/src/context/SearchContext.types";
-
-import { MoviesSearchResult, PeopleSearchResult } from "./types";
+import { getFromSWAP } from "@/src/utils/getFromSWAP";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -8,47 +6,20 @@ export async function GET(request: Request) {
   const type = searchParams.get("type");
   const term = searchParams.get("term");
 
-  if (type === SearchType.PEOPLE) {
-    const response = await fetch(`https://swapi.tech/api/people/?name=${term}`);
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch people");
-    }
-
-    const data = await response.json();
-
-    if (data.message !== "ok") {
-      return Response.json({ message: "Failed to fetch people" });
-    }
-
-    const results = data.result.map((result: PeopleSearchResult) => ({
-      type: SearchType.PEOPLE,
-      uid: result.uid,
-      name: result.properties.name,
-    }));
-
-    return Response.json({ results });
-  } else if (type === SearchType.MOVIES) {
-    const response = await fetch(`https://swapi.tech/api/films/?title=${term}`);
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch movies");
-    }
-
-    const data = await response.json();
-
-    if (data.message !== "ok") {
-      return Response.json({ message: "Failed to fetch movies" });
-    }
-
-    const results = data.result.map((result: MoviesSearchResult) => ({
-      type: SearchType.MOVIES,
-      uid: result.uid,
-      title: result.properties.title,
-    }));
-
-    return Response.json({ results });
+  if (!type || !term) {
+    return Response.json({ message: "Missing type or term" }, { status: 500 });
   }
 
-  return Response.json({ message: "Invalid search type" });
+  try {
+    const results = await getFromSWAP(type, term);
+
+    return Response.json({ results });
+  } catch (error) {
+    console.error(error);
+
+    return Response.json(
+      { message: "Failed to fetch results" },
+      { status: 500 }
+    );
+  }
 }
