@@ -2,7 +2,7 @@
 
 import { SearchProvider } from "@/src/context/SearchContext";
 
-import Results from "./components/Results";
+import ResultsArea from "./components/ResultsArea";
 import SearchForm from "./components/SearchForm";
 
 export default function SearchPage() {
@@ -10,7 +10,7 @@ export default function SearchPage() {
     <SearchProvider>
       <div className="w-[511px] mx-auto flex gap-x-[15px] items-start">
         <SearchForm />
-        <Results />
+        <ResultsArea />
       </div>
     </SearchProvider>
   );
