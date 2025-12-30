@@ -3,7 +3,7 @@ import { SearchType } from "@/src/context/SearchContext.types";
 
 import SearchTypeOption from "./SearchTypeOption";
 
-export default function SearchInput() {
+export default function SearchForm() {
   const {
     searchType,
     searchTerm,
