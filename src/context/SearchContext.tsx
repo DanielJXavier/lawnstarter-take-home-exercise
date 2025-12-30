@@ -1,31 +1,33 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
-type SearchType = "people" | "movies";
+export enum SearchType {
+  PEOPLE = "people",
+  MOVIES = "movies",
+}
 
 type SearchContextType = {
   searchType: SearchType;
-  setSearchType: (searchType: SearchType) => void;
+  setSearchType: Dispatch<SetStateAction<SearchType>>;
   searchTerm: string;
-  setSearchTerm: (searchTerm: string) => void;
+  setSearchTerm: Dispatch<SetStateAction<string>>;
   isSearching: boolean;
-  setIsSearching: (isSearching: boolean) => void;
+  setIsSearching: Dispatch<SetStateAction<boolean>>;
 };
 
-const SearchContext = createContext<SearchContextType>({
-  searchType: "people",
-  setSearchType: () => {},
-  searchTerm: "",
-  setSearchTerm: () => {},
-  isSearching: false,
-  setIsSearching: () => {},
-});
+const SearchContext = createContext<SearchContextType>({} as SearchContextType);
 
 export const useSearchContext = () => useContext(SearchContext);
 
 export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
-  const [searchType, setSearchType] = useState<SearchType>("people");
+  const [searchType, setSearchType] = useState<SearchType>(SearchType.PEOPLE);
 
   const [searchTerm, setSearchTerm] = useState("");
 

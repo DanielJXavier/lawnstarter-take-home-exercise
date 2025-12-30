@@ -1,4 +1,4 @@
-import { useSearchContext } from "@/src/context/SearchContext";
+import { SearchType, useSearchContext } from "@/src/context/SearchContext";
 
 export default function SearchInput() {
   const {
@@ -20,12 +20,15 @@ export default function SearchInput() {
             className="appearance-none cursor-pointer checked:cursor-default size-2 flex items-center justify-center border-[0.5px] border-pinkish-grey rounded-full before:content-[''] before:size-0.5 before:bg-white before:rounded-full checked:border-[3px] checked:border-emerald-2"
             type="radio"
             name="search-type"
-            id="people"
-            value="people"
-            checked={searchType === "people"}
-            onChange={() => setSearchType("people")}
+            id={SearchType.PEOPLE}
+            value={SearchType.PEOPLE}
+            checked={searchType === SearchType.PEOPLE}
+            onChange={() => setSearchType(SearchType.PEOPLE)}
           />
-          <label className="text-[7px] font-bold text-black" htmlFor="people">
+          <label
+            className="text-[7px] font-bold text-black"
+            htmlFor={SearchType.PEOPLE}
+          >
             People
           </label>
         </div>
@@ -35,12 +38,15 @@ export default function SearchInput() {
             className="appearance-none cursor-pointer checked:cursor-default size-2 flex items-center justify-center border-[0.5px] border-pinkish-grey rounded-full before:content-[''] before:size-0.5 before:bg-white before:rounded-full checked:border-[3px] checked:border-emerald-2"
             type="radio"
             name="search-type"
-            id="movies"
-            value="movies"
-            checked={searchType === "movies"}
-            onChange={() => setSearchType("movies")}
+            id={SearchType.MOVIES}
+            value={SearchType.MOVIES}
+            checked={searchType === SearchType.MOVIES}
+            onChange={() => setSearchType(SearchType.MOVIES)}
           />
-          <label className="text-[7px] font-bold text-black" htmlFor="movies">
+          <label
+            className="text-[7px] font-bold text-black"
+            htmlFor={SearchType.MOVIES}
+          >
             Movies
           </label>
         </div>
