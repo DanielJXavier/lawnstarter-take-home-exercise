@@ -4,11 +4,42 @@ import { SearchType } from "@/src/context/SearchContext.types";
 import SearchTypeOption from "./SearchTypeOption";
 
 export default function SearchInput() {
-  const { searchType, searchTerm, setSearchTerm, isSearching, setIsSearching } =
-    useSearchContext();
+  const {
+    searchType,
+    searchTerm,
+    setSearchTerm,
+    isSearching,
+    setIsSearching,
+    setResultType,
+    setResults,
+  } = useSearchContext();
+
+  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setIsSearching(true);
+
+    try {
+      const response = await fetch(
+        `/api/search?type=${searchType}&term=${searchTerm}`
+      );
+
+      const data = await response.json();
+
+      setResultType(searchType);
+      setResults(data.results);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSearching(false);
+    }
+  };
 
   return (
-    <div className="w-[205px] mt-[15px] p-[15px] grid gap-y-2.5 bg-white rounded-xs border-[0.5px] border-green-teal shadow-[0_0.5px_1px_0_var(--color-warm-grey-75)]">
+    <form
+      className="w-[205px] mt-[15px] p-[15px] grid gap-y-2.5 bg-white rounded-xs border-[0.5px] border-green-teal shadow-[0_0.5px_1px_0_var(--color-warm-grey-75)]"
+      onSubmit={handleSearch}
+    >
       <p className="text-[7px] font-semibold">What are you searching for?</p>
 
       <div className="flex gap-x-[15px]">
@@ -31,10 +62,9 @@ export default function SearchInput() {
       <button
         className="py-1 rounded-[10px] border-[0.5px] broder-green-teal-2 disabled:border-pinkish-grey bg-green-teal-2 disabled:bg-pinkish-grey text-white font-bold text-[7px] uppercase cursor-pointer disabled:cursor-not-allowed outline-none"
         disabled={!searchTerm}
-        onClick={() => setIsSearching(true)}
       >
         {isSearching ? "Searching..." : "Search"}
       </button>
-    </div>
+    </form>
   );
 }

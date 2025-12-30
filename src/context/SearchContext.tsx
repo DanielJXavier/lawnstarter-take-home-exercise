@@ -19,6 +19,10 @@ export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [isSearching, setIsSearching] = useState(false);
 
+  const [resultType, setResultType] = useState<SearchType>(SearchType.PEOPLE);
+
+  const [results, setResults] = useState<SearchResult[]>([]);
+
   return (
     <SearchContext.Provider
       value={{
@@ -28,9 +32,14 @@ export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
         setSearchTerm,
         isSearching,
         setIsSearching,
+        resultType,
+        setResultType,
+        results,
+        setResults,
       }}
     >
       {children}
     </SearchContext.Provider>
   );
 };
+export { SearchType };
