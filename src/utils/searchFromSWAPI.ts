@@ -1,5 +1,5 @@
 import { BASE_SWAPI_URL } from "../app/api/constants";
-import { PeopleResult, MoviesResult } from "../app/api/types";
+import { PersonResult, MovieResult } from "../app/api/types";
 
 import { SearchType } from "../context/SearchContext.types";
 
@@ -23,13 +23,13 @@ export const searchFromSWAPI = async (type: string, term: string) => {
   }
 
   if (isPeople) {
-    return result.map((result: PeopleResult) => ({
+    return result.map((result: PersonResult) => ({
       type: SearchType.PEOPLE,
       uid: result.uid,
       name: result.properties.name,
     }));
   } else {
-    return result.map((result: MoviesResult) => ({
+    return result.map((result: MovieResult) => ({
       type: SearchType.MOVIES,
       uid: result.uid,
       title: result.properties.title,

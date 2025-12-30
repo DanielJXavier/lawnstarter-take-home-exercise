@@ -5,7 +5,7 @@ type BaseResult = {
   __v: number;
 };
 
-export interface PeopleResult extends BaseResult {
+export interface PersonResult extends BaseResult {
   properties: {
     created: string;
     edited: string;
@@ -25,7 +25,7 @@ export interface PeopleResult extends BaseResult {
   };
 }
 
-export interface MoviesResult extends BaseResult {
+export interface MovieResult extends BaseResult {
   properties: {
     created: string;
     edited: string;
