@@ -19,7 +19,7 @@ export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [isSearching, setIsSearching] = useState(false);
 
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(false);
 
   const [results, setResults] = useState<SearchResult[]>([]);
 

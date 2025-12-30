@@ -18,18 +18,26 @@ export default function SearchForm() {
     e.preventDefault();
 
     setIsSearching(true);
-    setError(null);
+    setError(false);
 
     try {
       const response = await fetch(
         `/api/search?type=${searchType}&term=${searchTerm}`
       );
 
-      const data = await response.json();
+      if (!response.ok) {
+        setError(true);
 
-      setResults(data.results);
+        return;
+      }
+
+      const { results } = await response.json();
+
+      setResults(results);
     } catch (error) {
-      setError((error as Error).message);
+      console.error(error);
+
+      setError(true);
     } finally {
       setIsSearching(false);
     }
