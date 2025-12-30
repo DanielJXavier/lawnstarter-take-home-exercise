@@ -1,26 +1,12 @@
 "use client";
 
+import { createContext, useContext, useState } from "react";
+
 import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useState,
-} from "react";
-
-export enum SearchType {
-  PEOPLE = "people",
-  MOVIES = "movies",
-}
-
-type SearchContextType = {
-  searchType: SearchType;
-  setSearchType: Dispatch<SetStateAction<SearchType>>;
-  searchTerm: string;
-  setSearchTerm: Dispatch<SetStateAction<string>>;
-  isSearching: boolean;
-  setIsSearching: Dispatch<SetStateAction<boolean>>;
-};
+  SearchContextType,
+  SearchResult,
+  SearchType,
+} from "./SearchContext.types";
 
 const SearchContext = createContext<SearchContextType>({} as SearchContextType);
 

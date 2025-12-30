@@ -1,4 +1,5 @@
-import { SearchType, useSearchContext } from "@/src/context/SearchContext";
+import { useSearchContext } from "@/src/context/SearchContext";
+import { SearchType } from "@/src/context/SearchContext.types";
 
 import SearchTypeOption from "./SearchTypeOption";
 
