@@ -1,55 +1,18 @@
 import { SearchType, useSearchContext } from "@/src/context/SearchContext";
 
+import SearchTypeOption from "./SearchTypeOption";
+
 export default function SearchInput() {
-  const {
-    searchType,
-    setSearchType,
-    searchTerm,
-    setSearchTerm,
-    isSearching,
-    setIsSearching,
-  } = useSearchContext();
+  const { searchType, searchTerm, setSearchTerm, isSearching, setIsSearching } =
+    useSearchContext();
 
   return (
     <div className="w-[205px] mt-[15px] p-[15px] grid gap-y-2.5 bg-white rounded-xs border-[0.5px] border-green-teal shadow-[0_0.5px_1px_0_var(--color-warm-grey-75)]">
       <p className="text-[7px] font-semibold">What are you searching for?</p>
 
       <div className="flex gap-x-[15px]">
-        <div className="flex items-center gap-x-[5px]">
-          <input
-            className="appearance-none cursor-pointer checked:cursor-default size-2 flex items-center justify-center border-[0.5px] border-pinkish-grey rounded-full before:content-[''] before:size-0.5 before:bg-white before:rounded-full checked:border-[3px] checked:border-emerald-2"
-            type="radio"
-            name="search-type"
-            id={SearchType.PEOPLE}
-            value={SearchType.PEOPLE}
-            checked={searchType === SearchType.PEOPLE}
-            onChange={() => setSearchType(SearchType.PEOPLE)}
-          />
-          <label
-            className="text-[7px] font-bold text-black"
-            htmlFor={SearchType.PEOPLE}
-          >
-            People
-          </label>
-        </div>
-
-        <div className="flex items-center gap-x-[5px]">
-          <input
-            className="appearance-none cursor-pointer checked:cursor-default size-2 flex items-center justify-center border-[0.5px] border-pinkish-grey rounded-full before:content-[''] before:size-0.5 before:bg-white before:rounded-full checked:border-[3px] checked:border-emerald-2"
-            type="radio"
-            name="search-type"
-            id={SearchType.MOVIES}
-            value={SearchType.MOVIES}
-            checked={searchType === SearchType.MOVIES}
-            onChange={() => setSearchType(SearchType.MOVIES)}
-          />
-          <label
-            className="text-[7px] font-bold text-black"
-            htmlFor={SearchType.MOVIES}
-          >
-            Movies
-          </label>
-        </div>
+        <SearchTypeOption option={SearchType.PEOPLE} />
+        <SearchTypeOption option={SearchType.MOVIES} />
       </div>
 
       <input
