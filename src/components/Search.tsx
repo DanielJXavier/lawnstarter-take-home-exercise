@@ -11,6 +11,8 @@ export default function Search() {
             name="search-type"
             id="people"
             value="people"
+            checked
+            readOnly
           />
           <label className="text-[7px] font-bold text-black" htmlFor="people">
             People
