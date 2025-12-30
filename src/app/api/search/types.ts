@@ -1,0 +1,46 @@
+export type PeopleSearchResult = {
+  properties: {
+    created: string;
+    edited: string;
+    name: string;
+    gender: string;
+    skin_color: string;
+    hair_color: string;
+    height: string;
+    eye_color: string;
+    mass: string;
+    homeworld: string;
+    birth_year: string;
+    vehicles: string[];
+    starships: string[];
+    films: string[];
+    url: string;
+  };
+  _id: string;
+  description: string;
+  uid: string;
+  __v: number;
+};
+
+export type MoviesSearchResult = {
+  properties: {
+    created: string;
+    edited: string;
+    starships: string[];
+    vehicles: string[];
+    planets: string[];
+    producer: string;
+    title: string;
+    episode_id: number;
+    director: string;
+    release_date: string;
+    opening_crawl: string;
+    characters: string[];
+    species: string[];
+    url: string;
+  };
+  _id: string;
+  description: string;
+  uid: string;
+  __v: number;
+};
