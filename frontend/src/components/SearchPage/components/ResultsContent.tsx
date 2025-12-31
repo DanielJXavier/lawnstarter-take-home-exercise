@@ -37,7 +37,7 @@ export default function ResultsContent() {
   return (
     <ul className="grid items-start gap-y-[5px] h-fit">
       {results.map((result) => (
-        <Fragment key={result.uid}>
+        <Fragment key={result.id}>
           <li className="flex items-center justify-between">
             <span className="text-[8px] font-bold">
               {result.type === SearchType.PEOPLE ? result.name : result.title}
@@ -45,7 +45,7 @@ export default function ResultsContent() {
 
             <a
               className="px-2.5 py-1 bg-green-teal-2 rounded-[8.5px] text-[7px] font-bold text-white"
-              href={`/${result.type}/${result.uid}`}
+              href={`/${result.type}/${result.id}`}
             >
               SEE DETAILS
             </a>

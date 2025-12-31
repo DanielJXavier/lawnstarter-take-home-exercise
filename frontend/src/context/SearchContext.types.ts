@@ -8,12 +8,12 @@ export enum SearchType {
 export type SearchResult =
   | {
       type: SearchType.PEOPLE;
-      uid: string;
+      id: string;
       name: string;
     }
   | {
       type: SearchType.MOVIES;
-      uid: string;
+      id: string;
       title: string;
     };
 
