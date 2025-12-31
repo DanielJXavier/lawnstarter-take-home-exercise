@@ -10,7 +10,7 @@ import {
 
 @Injectable()
 export class SearchService {
-  async getSearchResults(type: string, term: string) {
+  async getSearchResults(type: SearchType, term: string) {
     const isPeople = type === SearchType.PEOPLE;
 
     const targetUrl = isPeople
