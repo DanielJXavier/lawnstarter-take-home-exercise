@@ -14,7 +14,11 @@ export default async function Page({
   const response = await fetch(`${BASE_BACKEND_URL}/people/${id}`);
 
   if (!response.ok) {
-    return <div>Failed to fetch person details</div>;
+    return (
+      <div className="flex items-center justify-center row-span-2 text-[7px] text-pinkish-grey text-center font-bold">
+        Failed to fetch person details
+      </div>
+    );
   }
 
   const person: Person = await response.json();

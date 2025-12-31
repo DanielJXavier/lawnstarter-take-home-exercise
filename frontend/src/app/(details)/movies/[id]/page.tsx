@@ -14,7 +14,11 @@ export default async function Page({
   const response = await fetch(`${BASE_BACKEND_URL}/movies/${id}`);
 
   if (!response.ok) {
-    return <div>Failed to fetch movie details</div>;
+    return (
+      <div className="flex items-center justify-center row-span-2 text-[7px] text-pinkish-grey text-center font-bold">
+        Failed to fetch movie details
+      </div>
+    );
   }
 
   const movie: Movie = await response.json();
