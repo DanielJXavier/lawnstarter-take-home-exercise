@@ -1,25 +1,26 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { SearchController } from './search/search.controller';
-import { SearchService } from './search/search.service';
-
-import { PeopleController } from './people/people.controller';
-import { PeopleService } from './people/people.service';
-
-import { MoviesController } from './movies/movies.controller';
-import { MoviesService } from './movies/movies.service';
+import { SharedModule } from './shared/shared.module';
+import { SearchModule } from './search/search.module';
+import { PeopleModule } from './people/people.module';
+import { MoviesModule } from './movies/movies.module';
 
 @Module({
-  imports: [],
-  controllers: [
-    AppController,
-    SearchController,
-    PeopleController,
-    MoviesController,
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+    SharedModule,
+    SearchModule,
+    PeopleModule,
+    MoviesModule,
   ],
-  providers: [AppService, SearchService, PeopleService, MoviesService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

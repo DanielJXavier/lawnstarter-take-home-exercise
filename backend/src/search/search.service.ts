@@ -1,6 +1,6 @@
 import { Injectable, HttpException, HttpStatus, Logger } from '@nestjs/common';
 
-import { BASE_SWAPI_URL } from '../constants';
+import { SwapiService } from '../shared/swapi.service';
 
 import {
   SearchType,
@@ -12,29 +12,23 @@ import {
 export class SearchService {
   private readonly logger = new Logger(SearchService.name);
 
+  constructor(private readonly swapiService: SwapiService) {}
+
   async getSearchResults(type: SearchType, term: string) {
     const isPeople = type === SearchType.PEOPLE;
 
-    const targetUrl = isPeople
-      ? `${BASE_SWAPI_URL}/people/?name=${term}`
-      : `${BASE_SWAPI_URL}/films/?title=${term}`;
+    const endpoint = isPeople
+      ? `/people/?name=${term}`
+      : `/films/?title=${term}`;
 
     this.logger.log(`Searching for ${type} with term: "${term}"`);
 
     try {
-      const response = await fetch(targetUrl);
+      const response = await this.swapiService.fetchFromSwapi<{
+        result: Array<PersonResultSWAPIResponse | MovieResultSWAPIResponse>;
+      }>(endpoint);
 
-      if (!response.ok) {
-        this.logger.error(
-          `SWAPI request failed with status ${response.status} for ${type} search: ${term}`,
-        );
-        throw new HttpException(
-          `Failed to fetch ${type} from SWAPI`,
-          HttpStatus.BAD_GATEWAY,
-        );
-      }
-
-      const { result } = await response.json();
+      const { result } = response;
 
       if (!result || !Array.isArray(result)) {
         this.logger.warn(`No results found for ${type} search: ${term}`);

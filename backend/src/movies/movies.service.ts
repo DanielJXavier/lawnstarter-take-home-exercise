@@ -1,12 +1,6 @@
-import {
-  Injectable,
-  HttpException,
-  HttpStatus,
-  Logger,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, Logger } from '@nestjs/common';
 
-import { BASE_SWAPI_URL } from '../constants';
+import { SwapiService } from '../shared/swapi.service';
 
 import { SWAPIMoviesResponse, SWAPIPeopleResponse } from '../types';
 
@@ -14,29 +8,18 @@ import { SWAPIMoviesResponse, SWAPIPeopleResponse } from '../types';
 export class MoviesService {
   private readonly logger = new Logger(MoviesService.name);
 
+  constructor(private readonly swapiService: SwapiService) {}
+
   async getMovieDetails(id: string) {
     this.logger.log(`Fetching movie details for ID: ${id}`);
 
     try {
-      const targetUrl = `${BASE_SWAPI_URL}/films/${id}`;
-      const movieResponse = await fetch(targetUrl);
-
-      if (movieResponse.status === 404) {
-        this.logger.warn(`Movie not found with ID: ${id}`);
-        throw new NotFoundException(`Movie with ID ${id} not found`);
-      }
-
-      if (!movieResponse.ok) {
-        this.logger.error(
-          `SWAPI request failed with status ${movieResponse.status} for movie ID: ${id}`,
+      const movieResponse =
+        await this.swapiService.fetchFromSwapi<SWAPIMoviesResponse>(
+          `/films/${id}`,
         );
-        throw new HttpException(
-          'Failed to fetch movie details from SWAPI',
-          HttpStatus.BAD_GATEWAY,
-        );
-      }
 
-      const { result } = (await movieResponse.json()) as SWAPIMoviesResponse;
+      const { result } = movieResponse;
 
       const characterIds = result.properties.characters.map(
         (character: string) => character.split('/').pop(),
@@ -49,28 +32,18 @@ export class MoviesService {
       const characters = await Promise.all(
         characterIds.map(async (characterId: string) => {
           try {
-            const characterResponse = await fetch(
-              `${BASE_SWAPI_URL}/people/${characterId}`,
-            );
-
-            if (!characterResponse.ok) {
-              this.logger.warn(
-                `Failed to fetch character ${characterId} for movie ${id}`,
+            const characterResponse =
+              await this.swapiService.fetchFromSwapi<SWAPIPeopleResponse>(
+                `/people/${characterId}`,
               );
-              return null;
-            }
-
-            const { result } =
-              (await characterResponse.json()) as SWAPIPeopleResponse;
 
             return {
-              id: result.uid,
-              name: result.properties.name,
+              id: characterResponse.result.uid,
+              name: characterResponse.result.properties.name,
             };
           } catch (error) {
-            this.logger.error(
-              `Error fetching character ${characterId}`,
-              error instanceof Error ? error.stack : String(error),
+            this.logger.warn(
+              `Failed to fetch character ${characterId} for movie ${id}`,
             );
             return null;
           }
