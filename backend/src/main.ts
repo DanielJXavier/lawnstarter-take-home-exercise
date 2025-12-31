@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe, Logger } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
 
@@ -21,10 +22,26 @@ async function bootstrap() {
     }),
   );
 
+  // Setup Swagger documentation
+  const config = new DocumentBuilder()
+    .setTitle('Star Wars API')
+    .setDescription(
+      'A NestJS API that interfaces with SWAPI (Star Wars API) to provide information about Star Wars movies and characters',
+    )
+    .setVersion('1.0')
+    .addTag('search', 'Search for people and movies')
+    .addTag('people', 'Get information about Star Wars characters')
+    .addTag('movies', 'Get information about Star Wars movies')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
   const port = process.env.PORT || 4000;
   await app.listen(port);
 
   logger.log(`Application is running on: http://localhost:${port}`);
+  logger.log(`API Documentation available at: http://localhost:${port}/api`);
   logger.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 }
 
