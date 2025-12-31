@@ -1,3 +1,8 @@
+export enum SearchType {
+  PEOPLE = 'people',
+  MOVIES = 'movies',
+}
+
 type BaseResult = {
   _id: string;
   description: string;

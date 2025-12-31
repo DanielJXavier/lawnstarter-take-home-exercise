@@ -22,7 +22,7 @@ export default function SearchForm() {
 
     try {
       const response = await fetch(
-        `/api/search?type=${searchType}&term=${searchTerm}`
+        `http://localhost:4000/search?type=${searchType}&term=${searchTerm}`
       );
 
       if (!response.ok) {
@@ -31,7 +31,7 @@ export default function SearchForm() {
         return;
       }
 
-      const { results } = await response.json();
+      const results = await response.json();
 
       setResults(results);
     } catch (error) {
