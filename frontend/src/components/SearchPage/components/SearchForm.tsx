@@ -1,6 +1,8 @@
 import { useSearchContext } from "@/context/SearchContext";
 import { SearchType } from "@/context/SearchContext.types";
 
+import { BASE_BACKEND_URL } from "@/constants";
+
 import SearchTypeOption from "./SearchTypeOption";
 
 export default function SearchForm() {
@@ -22,7 +24,7 @@ export default function SearchForm() {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/search?type=${searchType}&term=${searchTerm}`
+        `${BASE_BACKEND_URL}/search?type=${searchType}&term=${searchTerm}`
       );
 
       if (!response.ok) {
