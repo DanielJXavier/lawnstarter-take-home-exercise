@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+.yarn/cache
+.yarn/unplugged
+.pnp.*
+
+# Testing
+coverage
+*.log
+
+# Build
+dist
+build
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode
+.idea
+
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Tests
+*.spec.ts
+test/
+
+# OS
+.DS_Store
+Thumbs.db
