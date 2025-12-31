@@ -16,12 +16,12 @@ export class PeopleService {
 
     const { result } = (await personResponse.json()) as SWAPIPeopleResponse;
 
-    const moviesIds = result.properties.films.map((film: string) =>
+    const movieIds = result.properties.films.map((film: string) =>
       film.split('/').pop(),
     );
 
     const movies = await Promise.all(
-      moviesIds.map(async (movieId: string) => {
+      movieIds.map(async (movieId: string) => {
         const movieResponse = await fetch(`${BASE_SWAPI_URL}/films/${movieId}`);
 
         const { result } = (await movieResponse.json()) as SWAPIMoviesResponse;
