@@ -3,14 +3,39 @@ export enum SearchType {
   MOVIES = 'movies',
 }
 
-type BaseResult = {
+type BaseSWAPIResponse = {
+  message: string;
+  apiVersion: string;
+  timestamp: string;
+  support: {
+    contact: string;
+    donate: string;
+    partnerDiscounts: {
+      saberMasters: {
+        link: string;
+        details: string;
+      };
+      heartMath: {
+        link: string;
+        details: string;
+      };
+    };
+  };
+  social: {
+    discord: string;
+    reddit: string;
+    github: string;
+  };
+};
+
+type BaseResultSWAPIResponse = {
   _id: string;
   description: string;
   uid: string;
   __v: number;
 };
 
-export interface PersonResult extends BaseResult {
+export interface PersonResultSWAPIResponse extends BaseResultSWAPIResponse {
   properties: {
     created: string;
     edited: string;
@@ -30,7 +55,7 @@ export interface PersonResult extends BaseResult {
   };
 }
 
-export interface MovieResult extends BaseResult {
+export interface MovieResultSWAPIResponse extends BaseResultSWAPIResponse {
   properties: {
     created: string;
     edited: string;
@@ -47,4 +72,12 @@ export interface MovieResult extends BaseResult {
     species: string[];
     url: string;
   };
+}
+
+export interface SWAPIPeopleResponse extends BaseSWAPIResponse {
+  result: PersonResultSWAPIResponse;
+}
+
+export interface SWAPIMoviesResponse extends BaseSWAPIResponse {
+  result: MovieResultSWAPIResponse;
 }

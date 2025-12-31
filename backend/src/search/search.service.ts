@@ -1,15 +1,14 @@
 import { Injectable } from '@nestjs/common';
 
-import { BASE_SWAPI_URL } from 'src/constants';
+import { SearchType } from '../types';
 
-import { MovieResult, PersonResult, SearchType } from 'src/types';
+import { BASE_SWAPI_URL } from '../constants';
+
+import { MovieResultSWAPIResponse, PersonResultSWAPIResponse } from '../types';
 
 @Injectable()
 export class SearchService {
-  async getSearchResults(
-    type: string,
-    term: string,
-  ): Promise<PersonResult[] | MovieResult[]> {
+  async getSearchResults(type: string, term: string): Promise<any> {
     const isPeople = type === SearchType.PEOPLE;
 
     const targetUrl = isPeople
@@ -22,22 +21,18 @@ export class SearchService {
       throw new Error(`Failed to fetch ${type}`);
     }
 
-    const { message, result } = await response.json();
-
-    if (message !== 'ok') {
-      return Promise.resolve([]);
-    }
+    const { result } = await response.json();
 
     if (isPeople) {
-      return result.map((result: PersonResult) => ({
+      return result.map((result: PersonResultSWAPIResponse) => ({
         type: SearchType.PEOPLE,
-        uid: result.uid,
+        id: result.uid,
         name: result.properties.name,
       }));
     } else {
-      return result.map((result: MovieResult) => ({
+      return result.map((result: MovieResultSWAPIResponse) => ({
         type: SearchType.MOVIES,
-        uid: result.uid,
+        id: result.uid,
         title: result.properties.title,
       }));
     }
