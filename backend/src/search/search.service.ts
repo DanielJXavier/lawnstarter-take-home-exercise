@@ -1,14 +1,16 @@
 import { Injectable } from '@nestjs/common';
 
-import { SearchType } from '../types';
-
 import { BASE_SWAPI_URL } from '../constants';
 
-import { MovieResultSWAPIResponse, PersonResultSWAPIResponse } from '../types';
+import {
+  SearchType,
+  MovieResultSWAPIResponse,
+  PersonResultSWAPIResponse,
+} from '../types';
 
 @Injectable()
 export class SearchService {
-  async getSearchResults(type: string, term: string): Promise<any> {
+  async getSearchResults(type: string, term: string) {
     const isPeople = type === SearchType.PEOPLE;
 
     const targetUrl = isPeople

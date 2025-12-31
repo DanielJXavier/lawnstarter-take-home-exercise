@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
 import { BASE_SWAPI_URL } from '../constants';
+
 import { SWAPIMoviesResponse, SWAPIPeopleResponse } from '../types';
 
 @Injectable()
 export class PeopleService {
-  async getPersonDetails(id: string): Promise<any> {
+  async getPersonDetails(id: string) {
     const targetUrl = `${BASE_SWAPI_URL}/people/${id}`;
 
     const personResponse = await fetch(targetUrl);
