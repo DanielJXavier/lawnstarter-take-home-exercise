@@ -1,4 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  HttpException,
+  HttpStatus,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 
 import { BASE_SWAPI_URL } from '../constants';
 
@@ -6,44 +12,103 @@ import { SWAPIMoviesResponse, SWAPIPeopleResponse } from '../types';
 
 @Injectable()
 export class PeopleService {
+  private readonly logger = new Logger(PeopleService.name);
+
   async getPersonDetails(id: string) {
-    const targetUrl = `${BASE_SWAPI_URL}/people/${id}`;
+    this.logger.log(`Fetching person details for ID: ${id}`);
 
-    const personResponse = await fetch(targetUrl);
+    try {
+      const targetUrl = `${BASE_SWAPI_URL}/people/${id}`;
+      const personResponse = await fetch(targetUrl);
 
-    if (!personResponse.ok) {
-      throw new Error(`Failed to fetch person details`);
+      if (personResponse.status === 404) {
+        this.logger.warn(`Person not found with ID: ${id}`);
+        throw new NotFoundException(`Person with ID ${id} not found`);
+      }
+
+      if (!personResponse.ok) {
+        this.logger.error(
+          `SWAPI request failed with status ${personResponse.status} for person ID: ${id}`,
+        );
+        throw new HttpException(
+          'Failed to fetch person details from SWAPI',
+          HttpStatus.BAD_GATEWAY,
+        );
+      }
+
+      const { result } = (await personResponse.json()) as SWAPIPeopleResponse;
+
+      const movieIds = result.properties.films.map((film: string) =>
+        film.split('/').pop(),
+      );
+
+      this.logger.log(
+        `Fetching ${movieIds.length} movie(s) for person: ${result.properties.name}`,
+      );
+
+      const movies = await Promise.all(
+        movieIds.map(async (movieId: string) => {
+          try {
+            const movieResponse = await fetch(
+              `${BASE_SWAPI_URL}/films/${movieId}`,
+            );
+
+            if (!movieResponse.ok) {
+              this.logger.warn(
+                `Failed to fetch movie ${movieId} for person ${id}`,
+              );
+              return null;
+            }
+
+            const { result } =
+              (await movieResponse.json()) as SWAPIMoviesResponse;
+
+            return {
+              id: result.uid,
+              title: result.properties.title,
+            };
+          } catch (error) {
+            this.logger.error(
+              `Error fetching movie ${movieId}`,
+              error instanceof Error ? error.stack : String(error),
+            );
+            return null;
+          }
+        }),
+      );
+
+      // Filter out any failed movie fetches
+      const validMovies = movies.filter((movie) => movie !== null);
+
+      this.logger.log(
+        `Successfully fetched person details for: ${result.properties.name}`,
+      );
+
+      return {
+        id: result.uid,
+        name: result.properties.name,
+        birth_year: result.properties.birth_year,
+        gender: result.properties.gender,
+        eye_color: result.properties.eye_color,
+        hair_color: result.properties.hair_color,
+        height: result.properties.height,
+        mass: result.properties.mass,
+        movies: validMovies,
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+
+      this.logger.error(
+        `Unexpected error fetching person details for ID: ${id}`,
+        error instanceof Error ? error.stack : String(error),
+      );
+
+      throw new HttpException(
+        'An unexpected error occurred while fetching person details',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
-
-    const { result } = (await personResponse.json()) as SWAPIPeopleResponse;
-
-    const movieIds = result.properties.films.map((film: string) =>
-      film.split('/').pop(),
-    );
-
-    const movies = await Promise.all(
-      movieIds.map(async (movieId: string) => {
-        const movieResponse = await fetch(`${BASE_SWAPI_URL}/films/${movieId}`);
-
-        const { result } = (await movieResponse.json()) as SWAPIMoviesResponse;
-
-        return {
-          id: result.uid,
-          title: result.properties.title,
-        };
-      }),
-    );
-
-    return {
-      id: result.uid,
-      name: result.properties.name,
-      birth_year: result.properties.birth_year,
-      gender: result.properties.gender,
-      eye_color: result.properties.eye_color,
-      hair_color: result.properties.hair_color,
-      height: result.properties.height,
-      mass: result.properties.mass,
-      movies,
-    };
   }
 }
