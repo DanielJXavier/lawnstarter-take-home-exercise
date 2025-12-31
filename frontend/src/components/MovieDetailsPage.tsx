@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { Fragment } from "react/jsx-runtime";
+
+import Link from "next/link";
 
 import { Movie, BasePerson } from "@/types";
 
@@ -9,22 +10,24 @@ export default function MovieDetailsPage({ movie }: { movie: Movie }) {
       <h1 className="text-[9px] font-bold text-black">{movie.title}</h1>
 
       <div className="grid grid-cols-[1fr_1fr] gap-x-[50px] items-start">
-        <div className="grid gap-y-[5px]">
-          <h2 className="text-[8px] font-bold text-black">Opening Crawl</h2>
-
-          <hr className="border-t-[0.5px] border-t-pinkish-grey" />
+        <div className="grid gap-y-[2.5px]">
+          <div className="grid gap-y-[5px]">
+            <h2 className="text-[8px] font-bold text-black">Opening Crawl</h2>
+            <hr className="border-t-[0.5px] border-t-pinkish-grey" />
+          </div>
 
           <p className="text-[7px] leading-tight text-black whitespace-pre-wrap">
             {movie.opening_crawl}
           </p>
         </div>
 
-        <div className="grid gap-y-[5px]">
-          <h2 className="text-[8px] font-bold text-black">Movies</h2>
+        <div className="grid gap-y-[2.5px]">
+          <div className="grid gap-y-[5px]">
+            <h2 className="text-[8px] font-bold text-black">Movies</h2>
+            <hr className="border-t-[0.5px] border-t-pinkish-grey" />
+          </div>
 
-          <hr className="border-t-[0.5px] border-t-pinkish-grey" />
-
-          <ul className="text-[7px]">
+          <ul className="text-[7px] leading-tight">
             {movie.characters.map((character: BasePerson) => (
               <Fragment key={character.id}>
                 <li className="text-emerald-2 inline hover:underline last:[&_span]:hidden">

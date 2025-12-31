@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { Fragment } from "react/jsx-runtime";
+
+import Link from "next/link";
 
 import { Person, BaseMovie } from "@/types";
 
@@ -9,27 +10,29 @@ export default function PersonDetailsPage({ person }: { person: Person }) {
       <h1 className="text-[9px] font-bold text-black">{person.name}</h1>
 
       <div className="grid grid-cols-[1fr_1fr] gap-x-[50px] items-start">
-        <div className="grid gap-y-[5px]">
-          <h2 className="text-[8px] font-bold text-black">Details</h2>
-
-          <hr className="border-t-[0.5px] border-t-pinkish-grey" />
-
-          <div className="text-[7px] leading-tight text-black">
-            <p>Birth Year: {person.birth_year}</p>
-            <p>Gender: {person.gender}</p>
-            <p>Eye Color: {person.eye_color}</p>
-            <p>Hair Color: {person.hair_color}</p>
-            <p>Height: {person.height}</p>
-            <p>Mass: {person.mass}</p>
+        <div className="grid gap-y-[2.5px]">
+          <div className="grid gap-y-[5px]">
+            <h2 className="text-[8px] font-bold text-black">Details</h2>
+            <hr className="border-t-[0.5px] border-t-pinkish-grey" />
           </div>
+
+          <ul className="text-[7px] leading-tight text-black">
+            <li>Birth Year: {person.birth_year}</li>
+            <li>Gender: {person.gender}</li>
+            <li>Eye Color: {person.eye_color}</li>
+            <li>Hair Color: {person.hair_color}</li>
+            <li>Height: {person.height}</li>
+            <li>Mass: {person.mass}</li>
+          </ul>
         </div>
 
-        <div className="grid gap-y-[5px]">
-          <h2 className="text-[8px] font-bold text-black">Movies</h2>
+        <div className="grid gap-y-[2.5px]">
+          <div className="grid gap-y-[5px]">
+            <h2 className="text-[8px] font-bold text-black">Movies</h2>
+            <hr className="border-t-[0.5px] border-t-pinkish-grey" />
+          </div>
 
-          <hr className="border-t-[0.5px] border-t-pinkish-grey" />
-
-          <ul className="text-[7px]">
+          <ul className="text-[7px] leading-tight">
             {person.movies.map((movie: BaseMovie) => (
               <Fragment key={movie.id}>
                 <li className="text-emerald-2 inline hover:underline last:[&_span]:hidden">
