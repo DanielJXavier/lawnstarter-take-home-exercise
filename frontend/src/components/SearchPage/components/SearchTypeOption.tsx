@@ -1,5 +1,5 @@
-import { useSearchContext } from "@/src/context/SearchContext";
-import { SearchType } from "@/src/context/SearchContext.types";
+import { useSearchContext } from "@/context/SearchContext";
+import { SearchType } from "@/context/SearchContext.types";
 
 export default function SearchTypeOption({ option }: { option: SearchType }) {
   const { searchType, setSearchType } = useSearchContext();

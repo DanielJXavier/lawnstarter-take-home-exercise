@@ -1,6 +1,6 @@
 "use client";
 
-import { SearchProvider } from "@/src/context/SearchContext";
+import { SearchProvider } from "@/context/SearchContext";
 
 import ResultsArea from "./components/ResultsArea";
 import SearchForm from "./components/SearchForm";
