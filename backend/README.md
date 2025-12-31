@@ -31,12 +31,15 @@ Star Wars API - A NestJS backend that interfaces with [SWAPI (Star Wars API)](ht
 - ✅ **Search** - Search for people by name or movies by title
 - ✅ **Movie Details** - Get detailed information about movies including characters
 - ✅ **Character Details** - Get detailed information about characters including movies
+- ✅ **Query Statistics** - Automatic tracking and statistics computation
 - ✅ **Input Validation** - Automatic validation using DTOs and class-validator
 - ✅ **Error Handling** - Proper HTTP exceptions with meaningful error messages
 - ✅ **Logging** - Comprehensive logging for debugging and monitoring
 - ✅ **Swagger Documentation** - Interactive API documentation
 - ✅ **Environment Configuration** - Configurable via environment variables
 - ✅ **Modular Architecture** - Feature modules for better organization
+- ✅ **Event-Driven Stats** - Statistics computed via scheduled events every 5 minutes
+- ✅ **Comprehensive Tests** - 64 tests with excellent coverage
 
 ## API Documentation
 
@@ -85,6 +88,12 @@ $ yarn install
 - `GET /movies/:id`
   - Get detailed information about a movie
   - Example: `GET /movies/1`
+
+### Statistics
+- `GET /statistics`
+  - Get pre-computed statistics about search queries
+  - Statistics are automatically recomputed every 5 minutes
+  - Includes: top queries, average response time, popular hours, and more
 
 For complete documentation with request/response schemas, visit the Swagger UI at `/api`.
 

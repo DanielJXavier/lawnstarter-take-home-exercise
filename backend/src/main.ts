@@ -3,6 +3,7 @@ import { ValidationPipe, Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
+import { QueryTrackingInterceptor } from './statistics/query-tracking.interceptor';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
@@ -22,6 +23,10 @@ async function bootstrap() {
     }),
   );
 
+  // Enable query tracking interceptor globally
+  const queryTrackingInterceptor = app.get(QueryTrackingInterceptor);
+  app.useGlobalInterceptors(queryTrackingInterceptor);
+
   // Setup Swagger documentation
   const config = new DocumentBuilder()
     .setTitle('Star Wars API')
@@ -32,6 +37,7 @@ async function bootstrap() {
     .addTag('search', 'Search for people and movies')
     .addTag('people', 'Get information about Star Wars characters')
     .addTag('movies', 'Get information about Star Wars movies')
+    .addTag('statistics', 'Get search query statistics')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
