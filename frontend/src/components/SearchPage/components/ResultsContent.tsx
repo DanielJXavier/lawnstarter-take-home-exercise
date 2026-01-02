@@ -1,4 +1,4 @@
-import { Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
 
 import { useSearchContext } from "@/context/SearchContext";
 import { SearchType } from "@/context/SearchContext.types";
