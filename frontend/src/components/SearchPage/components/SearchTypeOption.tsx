@@ -5,7 +5,7 @@ type SearchTypeOptionProps = {
   option: SearchType;
 };
 
-export default function SearchTypeOption({ option }: SearchTypeOptionProps) {
+const SearchTypeOption = ({ option }: SearchTypeOptionProps) => {
   const { searchType, setSearchType } = useSearchContext();
 
   return (
@@ -23,4 +23,6 @@ export default function SearchTypeOption({ option }: SearchTypeOptionProps) {
       </label>
     </div>
   );
-}
+};
+
+export default SearchTypeOption;

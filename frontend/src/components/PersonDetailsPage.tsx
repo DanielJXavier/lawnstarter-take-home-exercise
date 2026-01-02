@@ -9,33 +9,33 @@ type PersonDetailsPageProps = {
   person: Person;
 };
 
-export default function PersonDetailsPage({ person }: PersonDetailsPageProps) {
-  return (
-    <BaseDetailsPage title={person.name}>
-      <Section title="Details">
-        <ul className="text-[7px] leading-tight text-black">
-          <li>Birth Year: {person.birth_year}</li>
-          <li>Gender: {person.gender}</li>
-          <li>Eye Color: {person.eye_color}</li>
-          <li>Hair Color: {person.hair_color}</li>
-          <li>Height: {person.height}</li>
-          <li>Mass: {person.mass}</li>
-        </ul>
-      </Section>
+const PersonDetailsPage = ({ person }: PersonDetailsPageProps) => (
+  <BaseDetailsPage title={person.name}>
+    <Section title="Details">
+      <ul className="text-[7px] leading-tight text-black">
+        <li>Birth Year: {person.birth_year}</li>
+        <li>Gender: {person.gender}</li>
+        <li>Eye Color: {person.eye_color}</li>
+        <li>Hair Color: {person.hair_color}</li>
+        <li>Height: {person.height}</li>
+        <li>Mass: {person.mass}</li>
+      </ul>
+    </Section>
 
-      <Section title="Movies">
-        <ul className="text-[7px] leading-tight">
-          {person.movies.map((movie: BaseMovie) => (
-            <li
-              key={movie.id}
-              className="text-emerald-2 inline hover:underline last:[&_span]:hidden"
-            >
-              <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
-              <span className="text-[#383838]">, </span>
-            </li>
-          ))}
-        </ul>
-      </Section>
-    </BaseDetailsPage>
-  );
-}
+    <Section title="Movies">
+      <ul className="text-[7px] leading-tight">
+        {person.movies.map((movie: BaseMovie) => (
+          <li
+            key={movie.id}
+            className="text-emerald-2 inline hover:underline last:[&_span]:hidden"
+          >
+            <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
+            <span className="text-[#383838]">, </span>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  </BaseDetailsPage>
+);
+
+export default PersonDetailsPage;

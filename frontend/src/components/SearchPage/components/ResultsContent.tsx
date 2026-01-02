@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSearchContext } from "@/context/SearchContext";
 import { SearchType } from "@/context/SearchContext.types";
 
-export default function ResultsContent() {
+const ResultsContent = () => {
   const { isSearching, error, results } = useSearchContext();
 
   if (isSearching) {
@@ -58,4 +58,6 @@ export default function ResultsContent() {
       ))}
     </ul>
   );
-}
+};
+
+export default ResultsContent;

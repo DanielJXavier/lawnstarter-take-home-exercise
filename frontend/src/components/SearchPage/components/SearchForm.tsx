@@ -5,7 +5,7 @@ import { BASE_BACKEND_URL } from "@/constants";
 
 import SearchTypeOption from "./SearchTypeOption";
 
-export default function SearchForm() {
+const SearchForm = () => {
   const {
     searchType,
     searchTerm,
@@ -77,4 +77,6 @@ export default function SearchForm() {
       </button>
     </form>
   );
-}
+};
+
+export default SearchForm;
