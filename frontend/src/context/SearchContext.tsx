@@ -42,4 +42,3 @@ export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
     </SearchContext.Provider>
   );
 };
-export { SearchType };
