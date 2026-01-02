@@ -1,4 +1,4 @@
-# Frontend - Star Wars API Interface
+# Frontend
 
 A modern Next.js 16 frontend for searching and viewing Star Wars characters and movies, with statistics tracking.
 

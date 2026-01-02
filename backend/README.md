@@ -1,7 +1,5 @@
 # backend
 
-## Description
-
 Star Wars API - A NestJS backend that interfaces with [SWAPI (Star Wars API)](https://swapi.tech) to provide information about Star Wars movies and characters.
 
 ## Features
