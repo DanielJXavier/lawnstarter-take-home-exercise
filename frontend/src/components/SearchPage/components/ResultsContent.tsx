@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import Link from "next/link";
+
 import { useSearchContext } from "@/context/SearchContext";
 import { SearchType } from "@/context/SearchContext.types";
 
@@ -43,12 +45,12 @@ export default function ResultsContent() {
               {result.type === SearchType.PEOPLE ? result.name : result.title}
             </span>
 
-            <a
+            <Link
               className="px-2.5 py-1 bg-green-teal-2 rounded-[8.5px] text-[7px] font-bold text-white"
               href={`/${result.type}/${result.id}`}
             >
               SEE DETAILS
-            </a>
+            </Link>
           </li>
 
           <hr className="border-t-[0.5px] border-t-pinkish-grey" />
