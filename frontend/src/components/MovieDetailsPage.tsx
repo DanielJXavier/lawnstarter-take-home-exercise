@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 import Link from "next/link";
 
 import { Movie, BasePerson } from "@/types";
@@ -19,12 +17,13 @@ export default function MovieDetailsPage({ movie }: { movie: Movie }) {
       <Section title="Characters">
         <ul className="text-[7px] leading-tight">
           {movie.characters.map((character: BasePerson) => (
-            <Fragment key={character.id}>
-              <li className="text-emerald-2 inline hover:underline last:[&_span]:hidden">
-                <Link href={`/people/${character.id}`}>{character.name}</Link>
-                <span className="text-[#383838]">, </span>
-              </li>
-            </Fragment>
+            <li
+              key={character.id}
+              className="text-emerald-2 inline hover:underline last:[&_span]:hidden"
+            >
+              <Link href={`/people/${character.id}`}>{character.name}</Link>
+              <span className="text-[#383838]">, </span>
+            </li>
           ))}
         </ul>
       </Section>
