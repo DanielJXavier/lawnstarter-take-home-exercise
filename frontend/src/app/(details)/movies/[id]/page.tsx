@@ -11,17 +11,21 @@ type PageProps = {
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
 
-  const response = await fetch(`${BASE_BACKEND_URL}/movies/${id}`);
+  try {
+    const response = await fetch(`${BASE_BACKEND_URL}/movies/${id}`);
 
-  if (!response.ok) {
+    if (!response.ok) {
+      throw new Error("Failed to fetch movie details");
+    }
+
+    const movie: Movie = await response.json();
+
+    return <MovieDetailsPage movie={movie} />;
+  } catch (error) {
     return (
       <div className="flex items-center justify-center row-span-2 text-[7px] text-pinkish-grey text-center font-bold">
-        Failed to fetch movie details
+        {(error as Error).message}
       </div>
     );
   }
-
-  const movie: Movie = await response.json();
-
-  return <MovieDetailsPage movie={movie} />;
 }
