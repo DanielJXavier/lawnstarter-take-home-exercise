@@ -1,9 +1,22 @@
-import { Dispatch, SetStateAction } from "react";
-
 export enum SearchType {
   PEOPLE = "people",
   MOVIES = "movies",
 }
+
+export type State = {
+  searchType: SearchType;
+  searchTerm: string;
+  isSearching: boolean;
+  error: boolean;
+  results: SearchResult[];
+};
+
+export type Action =
+  | { type: "SET_SEARCH_TYPE"; payload: SearchType }
+  | { type: "SET_SEARCH_TERM"; payload: string }
+  | { type: "SEARCH_START" }
+  | { type: "SEARCH_SUCCESS"; payload: SearchResult[] }
+  | { type: "SEARCH_ERROR" };
 
 export type SearchResult =
   | {
@@ -19,13 +32,13 @@ export type SearchResult =
 
 export type SearchContextType = {
   searchType: SearchType;
-  setSearchType: Dispatch<SetStateAction<SearchType>>;
+  setSearchType: (type: SearchType) => void;
   searchTerm: string;
-  setSearchTerm: Dispatch<SetStateAction<string>>;
+  setSearchTerm: (term: string) => void;
   isSearching: boolean;
-  setIsSearching: Dispatch<SetStateAction<boolean>>;
   error: boolean;
-  setError: Dispatch<SetStateAction<boolean>>;
   results: SearchResult[];
-  setResults: Dispatch<SetStateAction<SearchResult[]>>;
+  startSearch: () => void;
+  setSearchSuccess: (results: SearchResult[]) => void;
+  setSearchError: () => void;
 };

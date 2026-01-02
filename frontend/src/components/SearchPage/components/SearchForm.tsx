@@ -11,16 +11,15 @@ const SearchForm = () => {
     searchTerm,
     setSearchTerm,
     isSearching,
-    setIsSearching,
-    setError,
-    setResults,
+    startSearch,
+    setSearchSuccess,
+    setSearchError,
   } = useSearchContext();
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setIsSearching(true);
-    setError(false);
+    startSearch();
 
     try {
       const response = await fetch(
@@ -28,20 +27,15 @@ const SearchForm = () => {
       );
 
       if (!response.ok) {
-        setError(true);
-
+        setSearchError();
         return;
       }
 
       const results = await response.json();
-
-      setResults(results);
+      setSearchSuccess(results);
     } catch (error) {
       console.error(error);
-
-      setError(true);
-    } finally {
-      setIsSearching(false);
+      setSearchError();
     }
   };
 
