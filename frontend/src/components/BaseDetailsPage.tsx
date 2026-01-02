@@ -1,10 +1,12 @@
+type BaseDetailsPageProps = {
+  title: string;
+  children: React.ReactNode;
+};
+
 export default function BaseDetailsPage({
   title,
   children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
+}: BaseDetailsPageProps) {
   return (
     <>
       <h1 className="text-[9px] font-bold text-black">{title}</h1>

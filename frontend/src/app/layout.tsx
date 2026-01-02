@@ -1,3 +1,5 @@
+import { PropsWithChildren } from "react";
+
 import type { Metadata } from "next";
 
 import { Montserrat } from "next/font/google";
@@ -5,6 +7,8 @@ import { Montserrat } from "next/font/google";
 import Link from "next/link";
 
 import "./globals.css";
+
+type RootLayoutProps = PropsWithChildren;
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -16,11 +20,7 @@ export const metadata: Metadata = {
   description: "SWStarter Take Home Exercise",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={`${montserrat.variable} antialiased`}>

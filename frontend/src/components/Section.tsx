@@ -1,10 +1,9 @@
-export default function Section({
-  title,
-  children,
-}: {
+type SectionProps = {
   title: string;
   children: React.ReactNode;
-}) {
+};
+
+export default function Section({ title, children }: SectionProps) {
   return (
     <div className="grid gap-y-[2.5px]">
       <div className="grid gap-y-[5px]">

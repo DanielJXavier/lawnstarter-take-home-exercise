@@ -5,7 +5,11 @@ import { Person, BaseMovie } from "@/types";
 import BaseDetailsPage from "./BaseDetailsPage";
 import Section from "./Section";
 
-export default function PersonDetailsPage({ person }: { person: Person }) {
+type PersonDetailsPageProps = {
+  person: Person;
+};
+
+export default function PersonDetailsPage({ person }: PersonDetailsPageProps) {
   return (
     <BaseDetailsPage title={person.name}>
       <Section title="Details">

@@ -1,7 +1,11 @@
 import { useSearchContext } from "@/context/SearchContext";
 import { SearchType } from "@/context/SearchContext.types";
 
-export default function SearchTypeOption({ option }: { option: SearchType }) {
+type SearchTypeOptionProps = {
+  option: SearchType;
+};
+
+export default function SearchTypeOption({ option }: SearchTypeOptionProps) {
   const { searchType, setSearchType } = useSearchContext();
 
   return (

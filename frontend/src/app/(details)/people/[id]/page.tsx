@@ -4,11 +4,11 @@ import { BASE_BACKEND_URL } from "@/constants";
 
 import { Person } from "@/types";
 
-export default async function Page({
-  params,
-}: {
+type PageProps = {
   params: Promise<{ id: string }>;
-}) {
+};
+
+export default async function Page({ params }: PageProps) {
   const { id } = await params;
 
   const response = await fetch(`${BASE_BACKEND_URL}/people/${id}`);
