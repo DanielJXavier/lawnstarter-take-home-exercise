@@ -3,14 +3,17 @@ type BaseDetailsPageProps = {
   children: React.ReactNode;
 };
 
-const BaseDetailsPage = ({ title, children }: BaseDetailsPageProps) => (
-  <>
-    <h1 className="text-[9px] font-bold text-black">{title}</h1>
+export default function BaseDetailsPage({
+  title,
+  children,
+}: BaseDetailsPageProps) {
+  return (
+    <>
+      <h1 className="text-[9px] font-bold text-black">{title}</h1>
 
-    <div className="grid grid-cols-[1fr_1fr] gap-x-[50px] items-start">
-      {children}
-    </div>
-  </>
-);
-
-export default BaseDetailsPage;
+      <div className="grid grid-cols-[1fr_1fr] gap-x-[50px] gap-y-3 items-start">
+        {children}
+      </div>
+    </>
+  );
+}

@@ -22,3 +22,24 @@ export interface Movie extends BaseMovie {
   opening_crawl: string;
   characters: BasePerson[];
 }
+
+export interface Statistics {
+  topQueries: Array<{
+    term: string;
+    count: number;
+    percentage: number;
+  }>;
+  averageResponseTime: number;
+  popularHours: Array<{
+    hour: number;
+    count: number;
+    percentage: number;
+  }>;
+  searchTypeBreakdown: {
+    people: number;
+    movies: number;
+  };
+  totalQueries: number;
+  lastUpdated: Date;
+  nextUpdate: Date;
+}
