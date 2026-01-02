@@ -1,6 +1,6 @@
 import PersonDetailsPage from "@/components/PersonDetailsPage";
 
-import { BASE_BACKEND_URL } from "@/constants";
+import { SERVER_BACKEND_URL } from "@/constants";
 
 import { Person } from "@/types";
 
@@ -12,7 +12,7 @@ export default async function Page({ params }: PageProps) {
   const { id } = await params;
 
   try {
-    const response = await fetch(`${BASE_BACKEND_URL}/people/${id}`);
+    const response = await fetch(`${SERVER_BACKEND_URL}/people/${id}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch person details");

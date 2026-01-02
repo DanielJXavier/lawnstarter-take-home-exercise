@@ -1,12 +1,14 @@
 import StatisticsPage from "@/components/StatisticsPage";
 
-import { BASE_BACKEND_URL } from "@/constants";
+import { SERVER_BACKEND_URL } from "@/constants";
 
 import { Statistics } from "@/types";
 
 export default async function Page() {
   try {
-    const response = await fetch(`${BASE_BACKEND_URL}/statistics`);
+    const response = await fetch(`${SERVER_BACKEND_URL}/statistics`, {
+      cache: "no-store",
+    });
 
     if (!response.ok) {
       throw new Error("Failed to fetch statistics");

@@ -1,6 +1,6 @@
 import MovieDetailsPage from "@/components/MovieDetailsPage";
 
-import { BASE_BACKEND_URL } from "@/constants";
+import { SERVER_BACKEND_URL } from "@/constants";
 
 import { Movie } from "@/types";
 
@@ -12,7 +12,7 @@ export default async function Page({ params }: PageProps) {
   const { id } = await params;
 
   try {
-    const response = await fetch(`${BASE_BACKEND_URL}/movies/${id}`);
+    const response = await fetch(`${SERVER_BACKEND_URL}/movies/${id}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch movie details");
